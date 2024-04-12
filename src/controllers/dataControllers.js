@@ -161,19 +161,20 @@ const getMarqueeData = async(req, res) => {
 const postData = async (req, res) => {
   const { category, text, secure_url, fileType, endDate, heading } = req.body;
   if (category === 'sports') {
-    sportsData.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    const data = sportsData.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
   } else if (category === 'circulars') {
-    circulars.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    const data =circulars.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
   } else if (category === 'placements') {
-    placements.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    const data =placements.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
   } else if (category === 'events') {
-    events.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    const data =events.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
   } else if (category === 'others') {
-    others.create({ category, text, dispUrl: secure_url, fileType, endDate, heading  });
+    const data =others.create({ category, text, dispUrl: secure_url, fileType, endDate, heading  });
   }
   else{
-    dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading });
+    const data =dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading });
   }
+  res.status(200).json(data);
 };
 
 module.exports = {
