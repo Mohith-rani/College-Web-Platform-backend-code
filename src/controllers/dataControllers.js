@@ -163,7 +163,10 @@ const postData = async (req, res) => {
   if (category === 'sports') {
     sportsData.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
   } else if (category === 'circulars') {
-    circulars.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+   const resp = await circulars.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+   if(resp.ok){
+    res.status(200).json("Data Uploaded Sucessfully");
+   }
   } else if (category === 'placements') {
     placements.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
   } else if (category === 'events') {
