@@ -29,7 +29,7 @@ const getData = async (req, res) => {
       data = await circulars.find({});
     } else if (hour >= 14 && hour < 16) {
       data = await events.find({});
-    } else if (hour >= 16 && hour < 18) {
+    } else if (hour >= 16 && hour < 20) {
       data = await others.find({});
     } else {
       data = await dataModel.find({});
