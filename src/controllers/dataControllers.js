@@ -52,26 +52,24 @@ const getDelData = async(req,res) =>{
 //its not working
 const deleteData = async (req,res)=>{
  
-  const id = req.params.id;
+  const {id} = req.params.id;
   
   
   if(!mongoose.Types.ObjectId.isValid(id)){
     return res.status(404).json({error:"No such workout"})
   }
-  try{
-    const workout = await sportsData.findOneAndDelete({_id: id})
+
+  const workout = await sportsData.findOneAndDelete({_id: id})
   console.log(workout)
 
   if(!workout){
     return res.status(404).json({error:"No such workout"})
   }
 
-  res.status(200).json(workout);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error"});
-  }
-  
-};
+  res.status(200).json(workout)
+
+
+}
 
 const getSportsData = async (req,res) =>{
   const sportData = await sportsData.find({});
