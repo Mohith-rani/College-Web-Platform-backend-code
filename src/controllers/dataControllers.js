@@ -29,7 +29,7 @@ const getData = async (req, res) => {
       data = await circulars.find({});
     } else if (hour >= 14 && hour < 16) {
       data = await events.find({});
-    } else if (hour >= 16 && hour < 20) {
+    } else if (hour >= 16 && hour < 18) {
       data = await others.find({});
     } else {
       data = await dataModel.find({});
@@ -52,24 +52,26 @@ const getDelData = async(req,res) =>{
 //its not working
 const deleteData = async (req,res)=>{
  
-  const {id} = req.params.id;
+  const id = req.params.id;
   
   
   if(!mongoose.Types.ObjectId.isValid(id)){
     return res.status(404).json({error:"No such workout"})
   }
-
-  const workout = await sportsData.findOneAndDelete({_id: id})
+  try{
+    const workout = await sportsData.findOneAndDelete({_id: id})
   console.log(workout)
 
   if(!workout){
     return res.status(404).json({error:"No such workout"})
   }
 
-  res.status(200).json(workout)
-
-
-}
+  res.status(200).json(workout);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error"});
+  }
+  
+};
 
 const getSportsData = async (req,res) =>{
   const sportData = await sportsData.find({});
