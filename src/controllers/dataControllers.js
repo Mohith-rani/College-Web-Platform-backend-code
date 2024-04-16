@@ -29,7 +29,7 @@ const getData = async (req, res) => {
       data = await circulars.find({});
     } else if (hour >= 14 && hour < 16) {
       data = await events.find({});
-    } else if (hour >= 16 && hour < 23) {
+    } else if (hour >= 16 && hour < 18) {
       data = await others.find({});
     } else {
       data = await dataModel.find({});
@@ -159,20 +159,20 @@ const getMarqueeData = async(req, res) => {
 
 
 const postData = async (req, res) => {
-  const { category, text, secure_url, fileType, endDate, heading } = req.body;
+  const { category, text, secure_url, fileType, endDate, heading, name, mail, number} = req.body;
   if (category === 'sports') {
-    sportsData.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    sportsData.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
   } else if (category === 'circulars') {
-    circulars.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    circulars.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
   } else if (category === 'placements') {
-    placements.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    placements.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
   } else if (category === 'events') {
-    events.create({ category, text, dispUrl: secure_url, fileType, endDate, heading });
+    events.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
   } else if (category === 'others') {
-    others.create({ category, text, dispUrl: secure_url, fileType, endDate, heading  });
+    others.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number  });
   }
   else{
-    dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading });
+    dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
   }
 };
 
