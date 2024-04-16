@@ -14,6 +14,22 @@ const marqueeSchema = new Schema({
   endDate:{
     type:String,
     required:true
+  },
+  name:{
+    type:String,
+    required:true
+  },
+  mail:{
+    type:String,
+    required:true
+  },
+  number:{
+    type:String,
+    required:true
+  },
+  post:{
+    type:Boolean,
+    default: false
   }
 },{timestamps : true})
 
