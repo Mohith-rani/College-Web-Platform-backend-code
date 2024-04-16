@@ -155,6 +155,20 @@ const getMarqueeData = async(req, res) => {
   }
 };
 
+const updatePost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await circulars.findById(id);
+  const data = await circulars.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
 
 
 
@@ -192,5 +206,6 @@ module.exports = {
   deletePlacementsData,
   deleteOthersData,
   marqueeData,
-  getMarqueeData
+  getMarqueeData,
+  updatePost
 };
