@@ -155,7 +155,7 @@ const getMarqueeData = async(req, res) => {
   }
 };
 
-const updatePost = async(req,res)=>{
+const updateCircularPost = async(req,res)=>{
   const {id} = req.params;
   if(!mongoose.Types.ObjectId.isValid(id)){
     return res.status(404).json({error:"No such object"})
@@ -170,6 +170,80 @@ const updatePost = async(req,res)=>{
   res.status(200).json(resp.post);
 }
 
+const updateEventsPost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await events.findById(id);
+  const data = await events.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
+
+const updateSportsPost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await sportsData.findById(id);
+  const data = await sportsData.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
+
+const updatePlacementsPost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await placements.findById(id);
+  const data = await placements.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
+
+const updateOthersPost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await others.findById(id);
+  const data = await others.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
+
+const updateScrollPost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await marquee.findById(id);
+  const data = await marquee.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
 
 
 const postData = async (req, res) => {
@@ -207,5 +281,10 @@ module.exports = {
   deleteOthersData,
   marqueeData,
   getMarqueeData,
-  updatePost
+  updateCircularPost,
+  updateEventsPost,
+  updateSportsPost,
+  updatePlacementsPost,
+  updateOthersPost,
+  updateScrollPost
 };
