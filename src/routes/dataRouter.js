@@ -1,7 +1,7 @@
 const express = require('express')
 
 const router = express.Router();
-const {getData,postData,getDelData, deleteData, getSportsData, deleteSportsData, getOthersData, getPlacementsData, getEventsData, getCircularsData, deleteOthersData, deletePlacementsData, deleteEventsData, deleteCircularsData, marqueeData, getMarqueeData} = require('../controllers/dataControllers');
+const {getData,postData,getDelData, deleteData, getSportsData, deleteSportsData, getOthersData, getPlacementsData, getEventsData, getCircularsData, deleteOthersData, deletePlacementsData, deleteEventsData, deleteCircularsData, marqueeData, getMarqueeData,updatePost} = require('../controllers/dataControllers');
 
 
 
@@ -12,6 +12,7 @@ router.get('/delete/events',getEventsData)
 router.get('/delete/placements',getPlacementsData)
 router.get('/delete/others',  getOthersData)
 router.get('/upload',getMarqueeData)
+router.patch('/post/:id',updatePost)
 router.delete('/delete/sports/:id',deleteSportsData)
 router.delete('/delete/circulars/:id',deleteCircularsData)
 router.delete('/delete/events/:id',deleteEventsData)
