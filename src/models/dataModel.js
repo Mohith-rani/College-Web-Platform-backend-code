@@ -23,6 +23,10 @@ const dataSchema = Schema({
   fileType:{
     type:String,
     required:true
+  },
+  post:{
+    type:Boolean,
+    default: false
   }
 
 },{timestamps :true})
