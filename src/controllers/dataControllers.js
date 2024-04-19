@@ -8,7 +8,7 @@ const others = require('../models/others');
 const { default: mongoose } = require('mongoose');
 const marquee = require('../models/marquee');
 const moment = require('moment-timezone');
-const { default: Marquee } = require('../../../frontend/src/components/Marquee');
+
 
 
 
