@@ -8,7 +8,7 @@ const others = require('../models/others');
 const { default: mongoose } = require('mongoose');
 const marquee = require('../models/marquee');
 const moment = require('moment-timezone');
-
+// const { default: Marquee } = require('../../../frontend/src/components/Marquee');
 
 
 
@@ -20,22 +20,47 @@ const getData = async (req, res) => {
     const hour = istTime.hour();
     let data = [];
     console.log(hour)
-    if (hour >= 8 && hour < 10) {
+    // if (hour >= 8 && hour < 10) {
+    //   data = await placements.find({});
+    // } else if (hour >= 10 && hour < 11) {
+    //   data = await circulars.find({});
+    // } else if (hour >= 11 && hour < 12) {
+    //   data = await others.find({});
+    // } else if (hour >= 12 && hour < 14) {
+    //   data = await circulars.find({});
+    // } else if (hour >= 14 && hour < 16) {
+    //   data = await events.find({});
+    // } else if (hour >= 16 && hour < 18) {
+    //   data = await others.find({});
+    // } else {
+    //   data = await dataModel.find({});
+    // }
+
+    if (hour >= 8 && hour < 9) {
       data = await placements.find({});
-    } else if (hour >= 10 && hour < 11) {
+    } else if (hour >= 9 && hour < 10) {
       data = await circulars.find({});
+    } else if (hour >= 10 && hour < 11) {
+      data = await events.find({});
     } else if (hour >= 11 && hour < 12) {
       data = await others.find({});
-    } else if (hour >= 12 && hour < 14) {
+    } else if (hour >= 12 && hour < 13) {
+      data = await sportsData.find({});
+    } else if (hour >= 13 && hour < 14) {
       data = await circulars.find({});
-    } else if (hour >= 14 && hour < 16) {
+    }else if (hour >= 14 && hour < 15) {
       data = await events.find({});
-    } else if (hour >= 16 && hour < 18) {
+    } else if (hour >= 15 && hour < 16) {
+      data = await sportsData.find({});
+    }else if (hour >= 16 && hour < 17) {
+      data = await placements.find({});
+    }else if (hour >= 17 && hour < 18) {
       data = await others.find({});
-    } else {
+    }else {
       data = await dataModel.find({});
     }
 
+    
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
