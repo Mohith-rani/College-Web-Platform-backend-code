@@ -60,7 +60,7 @@ const getData = async (req, res) => {
       data = await dataModel.find({});
     }
 
-    
+
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
@@ -141,6 +141,11 @@ const deleteCircularsData = async(req,res) =>{
   res.status(200).json("circulars data deleted sucessfully");
 }
 
+const deleteMarqueeData = async(req,res)=>{
+  const id = req.params.id;
+  const response = await marquee.findByIdAndDelete(id);
+  res.status(200).json("Marquee data deleted Sucessfully");
+}
 
 const deleteEventsData = async(req,res) =>{
   const id = req.params.id; 
@@ -314,5 +319,6 @@ module.exports = {
   updateSportsPost,
   updatePlacementsPost,
   updateOthersPost,
-  updateScrollPost
+  updateScrollPost,
+  deleteMarqueeData
 };
