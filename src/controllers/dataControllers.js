@@ -54,7 +54,7 @@ const getData = async (req, res) => {
       data = await sportsData.find({});
     }else if (hour >= 16 && hour < 17) {
       data = await placements.find({});
-    }else if (hour >= 17 && hour < 18) {
+    }else if (hour >= 17 && hour < 19) {
       data = await others.find({});
     }else {
       data = await dataModel.find({});
