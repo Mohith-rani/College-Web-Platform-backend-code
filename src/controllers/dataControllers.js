@@ -8,6 +8,7 @@ const others = require('../models/others');
 const { default: mongoose } = require('mongoose');
 const marquee = require('../models/marquee');
 const moment = require('moment-timezone');
+const { default: Marquee } = require('../../../frontend/src/components/Marquee');
 
 
 
@@ -29,7 +30,7 @@ const getData = async (req, res) => {
       data = await circulars.find({});
     } else if (hour >= 14 && hour < 16) {
       data = await events.find({});
-    } else if (hour >= 16 && hour < 24) {
+    } else if (hour >= 16 && hour < 18) {
       data = await others.find({});
     } else {
       data = await dataModel.find({});
@@ -148,7 +149,7 @@ const marqueeData = async (req,res) =>{
 
 const getMarqueeData = async(req, res) => {
   try {
-    const latestData = await marquee.find({}).sort({ createdAt: -1 }).limit(1);
+    const latestData = await marquee.find({});
     res.status(200).json(latestData);
   } catch (error) {
     res.status(500).json({ message: "Failed to get latest data" });
@@ -258,6 +259,8 @@ const postData = async (req, res) => {
     events.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
   } else if (category === 'others') {
     others.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number  });
+  } else if (category === 'marquee') {
+    marquee.create({ category, text, fileType, endDate, heading, name, mail, number  });
   }
   else{
     dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
