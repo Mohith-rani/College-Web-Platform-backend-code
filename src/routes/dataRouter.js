@@ -1,7 +1,7 @@
 const express = require('express')
 
 const router = express.Router();
-const {getData,postData,getDelData, deleteData, getSportsData, deleteSportsData, getOthersData, getPlacementsData, getEventsData, getCircularsData, deleteOthersData, deletePlacementsData, deleteEventsData, deleteCircularsData, marqueeData, getMarqueeData,updateCircularPost, updateEventsPost, updateSportsPost, updatePlacementsPost, updateScrollPost, updateOthersPost, deleteMarqueeData} = require('../controllers/dataControllers');
+const {getData,postData,getDelData, deleteData, getSportsData, deleteSportsData, getOthersData, getPlacementsData, getEventsData, getCircularsData, deleteOthersData, deletePlacementsData, deleteEventsData, deleteCircularsData, marqueeData, getMarqueeData,updateCircularPost, updateEventsPost, updateSportsPost, updatePlacementsPost, updateScrollPost, updateOthersPost, deleteMarqueeData, deleteAchievementsData, updateAchievementsPost, getAchievementsData } = require('../controllers/dataControllers');
 
 
 
@@ -26,5 +26,8 @@ router.delete('/delete/others/:id',deleteOthersData)
 router.post('/upload',marqueeData)
 router.post('/vignan/upload',postData);
 router.delete('/delete/marquee/:id',deleteMarqueeData)
+router.delete('/delete/achievements/:id',deleteAchievementsData)
+router.patch('/achievements/post/:id',updateAchievementsPost)
+router.get('/delete/achievements',  getAchievementsData)
 
 module.exports = router;
