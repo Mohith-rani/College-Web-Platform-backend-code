@@ -142,7 +142,7 @@ const deleteSportsData = async(req,res) =>{
 const deleteAchievementsData = async(req,res) =>{
   const id = req.params.id; 
   console.log(id);
-  const response = await achievementsData.findByIdAndDelete(id);
+  const response = await achievements.findByIdAndDelete(id);
   res.status(200).json("achievements data deleted sucessfully");
 }
 
