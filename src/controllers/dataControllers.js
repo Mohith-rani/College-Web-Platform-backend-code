@@ -320,7 +320,7 @@ const postData = async (req, res) => {
   } else if (category === 'marquee') {
     marquee.create({ category, text, fileType, endDate, heading, name, mail, number  });
   }  else if (category === 'achievements') {
-    achievements.create({ category, text, fileType, endDate, heading, name, mail, number  });
+    achievements.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number  });
   }
   else{
     dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
