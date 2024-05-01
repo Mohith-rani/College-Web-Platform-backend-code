@@ -5,6 +5,7 @@ const circulars = require('../models/circulars');
 const placements = require('../models/placements');
 const events = require('../models/events');
 const others = require('../models/others');
+const achievements = require('../models/achievements');
 const { default: mongoose } = require('mongoose');
 const marquee = require('../models/marquee');
 const moment = require('moment-timezone');
@@ -54,8 +55,8 @@ const getData = async (req, res) => {
       data = await sportsData.find({});
     }else if (hour >= 16 && hour < 17) {
       data = await placements.find({});
-    }else if (hour >= 17 && hour < 24) {
-      data = await others.find({});
+    }else if (hour >= 17 && hour < 18) {
+      data = await achievements.find({});
     }else {
       data = await dataModel.find({});
     }
@@ -120,6 +121,11 @@ const getPlacementsData = async (req,res) =>{
   res.status(200).json(placementsData);
 }
 
+const getAchievementsData = async (req,res) =>{
+  const achievementsData = await achievements.find({});
+  res.status(200).json(achievementsData);
+}
+
 const getOthersData = async (req,res) =>{
   const othersData = await others.find({});
   res.status(200).json(othersData);
@@ -131,6 +137,13 @@ const deleteSportsData = async(req,res) =>{
   console.log(id);
   const response = await sportsData.findByIdAndDelete(id);
   res.status(200).json("sprorts data deleted sucessfully");
+}
+
+const deleteAchievementsData = async(req,res) =>{
+  const id = req.params.id; 
+  console.log(id);
+  const response = await achievementsData.findByIdAndDelete(id);
+  res.status(200).json("achievements data deleted sucessfully");
 }
 
 
@@ -246,6 +259,21 @@ const updatePlacementsPost = async(req,res)=>{
   res.status(200).json(resp.post);
 }
 
+const updateAchievementsPost = async(req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such object"})
+  }
+  const resp = await achievements.findById(id);
+  const data = await achievements.updateOne({_id:id},{$set : {post : resp.post? false : true}})
+
+  if(!data){
+    return res.status(404).json({error:"No such object"})
+  }
+
+  res.status(200).json(resp.post);
+}
+
 const updateOthersPost = async(req,res)=>{
   const {id} = req.params;
   if(!mongoose.Types.ObjectId.isValid(id)){
@@ -291,6 +319,8 @@ const postData = async (req, res) => {
     others.create({ category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number  });
   } else if (category === 'marquee') {
     marquee.create({ category, text, fileType, endDate, heading, name, mail, number  });
+  }  else if (category === 'achievements') {
+    achievements.create({ category, text, fileType, endDate, heading, name, mail, number  });
   }
   else{
     dataModel.create({category, text, dispUrl: secure_url, fileType, endDate, heading, name, mail, number });
@@ -320,5 +350,8 @@ module.exports = {
   updatePlacementsPost,
   updateOthersPost,
   updateScrollPost,
-  deleteMarqueeData
+  deleteMarqueeData,
+  updateAchievementsPost,
+  deleteAchievementsData,
+  getAchievementsData
 };
