@@ -184,8 +184,8 @@ const deleteOthersData = async(req,res) =>{
 }
 
 const marqueeData = async (req,res) =>{
-  const {first,second,endDate} = req.body;
-  const resp = marquee.create({first,second,endDate});
+  const {first,second,endDate,name,mail,number} = req.body;
+  const resp = await marquee.create({first,second,endDate,name,mail,number});
   res.status(200).json("data upload succesful");
 
 }
