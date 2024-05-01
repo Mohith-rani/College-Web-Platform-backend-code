@@ -48,4 +48,4 @@ const dataSchema = Schema({
 
 },{timestamps :true})
 
-module.exports = mongoose.model('circulars',dataSchema);
+module.exports = mongoose.model('achievements',dataSchema);
